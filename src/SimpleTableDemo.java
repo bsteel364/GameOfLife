@@ -60,7 +60,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
             columnNames[i] = "";
         }
         
-        board.randomlyFillBoard(15, 1);
+        board.randomlyFillBoard(15, 2);
         data = board.getIntegerMatrix();
         new Random();
 
