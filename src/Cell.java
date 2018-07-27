@@ -61,8 +61,13 @@ public class Cell {
 	}
 	
 	public void spawn() {
+		age = 0;
 		intValue = 1;
 		this.dead = false;
+	}
+	
+	public void addAge() {
+		this.age++;
 	}
 	
 	public int getWidth() {

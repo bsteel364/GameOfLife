@@ -60,7 +60,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
             columnNames[i] = "";
         }
         
-        board.randomlyFillBoard(15, 3);
+        board.randomlyFillBoard(15, 1);
         data = board.getIntegerMatrix();
         new Random();
 
@@ -142,7 +142,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
 
         //Add the scroll pane to this panel.
         add(scrollPane, BorderLayout.CENTER);
-        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 1000, 250);
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 1000, 1000);
 
         slider.setMinorTickSpacing(10);
         slider.setMajorTickSpacing(200);

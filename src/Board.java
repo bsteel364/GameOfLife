@@ -69,7 +69,7 @@ public class Board {
 		for(int i = 0; i < this.width; i++ ) {
 			for(int k = 0; k < this.height; k++ ) {
 				applyRules(getCell(i, k));
-			//	getCell(i, k).age;
+				getCell(i,k).addAge();
 			}
 		}
 		age++;
@@ -111,10 +111,12 @@ public class Board {
 	
 	
 	public void applyRules(Cell cell) {
+		ageRule(cell);
 		rule1(cell);
 		rule2(cell);
 		rule3(cell);
-	//	infectionRule(cell);
+		infectionRule(cell);
+		
 	//	testRule(cell);
 		//rule3(cell);
 	}
@@ -129,20 +131,28 @@ public class Board {
 	public void infectionRule(Cell cell) {
 		if(cell.isAlive() && !cell.isInfected() && isTouchingInfectedCell(cell.getWidth(), cell.getHeight())) {
 			cell.infect();
-		} else if(cell.isInfected() && cell.getAge() > 3) {
+		} else if(cell.isInfected() && (cell.getAge() > 0)) {
 			cell.defect();
 			cell.kill();
 		}
 	}
 	
+	public void ageRule(Cell cell) {
+		
+		if(cell.isAlive() && cell.getAge() > 6) {
+			System.out.println(cell.getAge());
+			cell.kill();
+		}
+	}
+	
 	public void rule1(Cell cell) {
-		if(this.getNumberOfLivingNeighbors(cell.getWidth(), cell.getHeight()) < 2){
+		if(cell.isAlive() && this.getNumberOfLivingNeighbors(cell.getWidth(), cell.getHeight()) < 2){
 			cell.kill();
 		}
 	}
 	
 	public void rule2(Cell cell) {
-		if(this.getNumberOfLivingNeighbors(cell.getWidth(), cell.getHeight()) > 3) {
+		if(cell.isAlive() && this.getNumberOfLivingNeighbors(cell.getWidth(), cell.getHeight()) > 3) {
 			cell.kill();
 		}
 	}
