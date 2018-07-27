@@ -52,7 +52,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
     }
 
     public void init() {
-    	board = new Board(100);
+    	board = new Board(75);
     	gridWidth = board.getWidth();
     	
         String[] columnNames = new String[gridWidth];
@@ -60,7 +60,9 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
             columnNames[i] = "";
         }
         
-        board.randomlyFillBoard(15, 2);
+        board.randomlyFillBoard(16, 2);
+       // board.squareFill(20);
+       // board.crossFill();
         data = board.getIntegerMatrix();
         new Random();
 

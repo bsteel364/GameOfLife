@@ -140,7 +140,7 @@ public class Board {
 	public void ageRule(Cell cell) {
 		
 		if(cell.isAlive() && cell.getAge() > 6) {
-			System.out.println(cell.getAge());
+		//	System.out.println(cell.getAge());
 			cell.kill();
 		}
 	}
@@ -200,6 +200,28 @@ public class Board {
 					} 
 				} else {
 					getCell(i, k).kill();
+				}
+			}
+		}
+	}
+	
+	public void squareFill(int s) {
+		
+		for(int i = (width/2)-(s/2); i < (width/2)+(s/2); i++ ) {
+			for(int k = (height/2)-(s/2); k < (height/2)+(s/2); k++ ) {
+				getCell(i, k).spawn();
+			}
+		}
+	}
+	
+	
+	
+	public void crossFill() {
+		for(int i = 0; i < width; i++ ) {
+			for(int k = 0; k < height; k++ ) {
+				if(i == k) {
+					getCell(i, k).spawn();
+					getCell((width-1)-i, k).spawn();
 				}
 			}
 		}
