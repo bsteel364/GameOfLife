@@ -61,10 +61,12 @@ public class Board {
 		return this.age;
 	}
 	
+	//for making sure we don't accidentally try to look outside the matrix and crash 
 	public boolean coordOutOfBounds(int w, int h) {
 		return ((w < 0 || w >= this.width)||(h < 0 || h >= this.height));
 	}
 	
+	//updates simulation 
 	public void update() {
 		for(int i = 0; i < this.width; i++ ) {
 			for(int k = 0; k < this.height; k++ ) {
@@ -97,6 +99,7 @@ public class Board {
 		return false;
 	}
 	
+	
 	public int getNumberOfLivingNeighbors(int w, int h) {
 		int neighbors = 0;
 		for(int i = w-1; i <= w+1; i++ ) {
@@ -109,7 +112,7 @@ public class Board {
 		return neighbors;
 	}
 	
-	
+	//List of all ACTIVE rules 
 	public void applyRules(Cell cell) {
 		ageRule(cell);
 		rule1(cell);
@@ -128,22 +131,6 @@ public class Board {
 	Any live cell with more than three live neighbors dies, as if by overpopulation.
 	Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 	*/
-	public void infectionRule(Cell cell) {
-		if(cell.isAlive() && !cell.isInfected() && isTouchingInfectedCell(cell.getWidth(), cell.getHeight())) {
-			cell.infect();
-		} else if(cell.isInfected() && (cell.getAge() > 0)) {
-			cell.defect();
-			cell.kill();
-		}
-	}
-	
-	public void ageRule(Cell cell) {
-		
-		if(cell.isAlive() && cell.getAge() > 6) {
-		//	System.out.println(cell.getAge());
-			cell.kill();
-		}
-	}
 	
 	public void rule1(Cell cell) {
 		if(cell.isAlive() && this.getNumberOfLivingNeighbors(cell.getWidth(), cell.getHeight()) < 2){
@@ -173,9 +160,30 @@ public class Board {
 		}
 	}
 	
+	///////////////////////////////// Age-Related Rules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	
+	public void infectionRule(Cell cell) {
+		if(cell.isAlive() && !cell.isInfected() && isTouchingInfectedCell(cell.getWidth(), cell.getHeight())) {
+			cell.infect();
+		} else if(cell.isInfected() && (cell.getAge() > 0)) {
+			cell.defect();
+			cell.kill();
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void ageRule(Cell cell) {
+		
+		if(cell.isAlive() && cell.getAge() > 6) {
+		//	System.out.println(cell.getAge());
+			cell.kill();
+		}
+	}
+	
+	
 	//////////////// === My Recursive Rules === \\\\\\\\\\\\\\\\\\\\\\\\\\
 	
-	//public void
 	
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,6 +195,8 @@ public class Board {
 			currentAge++;
 		}
 	}
+	
+	
 	
 	public void randomlyFillBoard(double precentageChanceOfBirthPerCell, double precentageChanceOfInfection) {
 		for(int i = 0; i < width; i++ ) {

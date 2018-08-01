@@ -52,7 +52,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
     }
 
     public void init() {
-    	board = new Board(75);
+    	board = new Board(90);
     	gridWidth = board.getWidth();
     	
         String[] columnNames = new String[gridWidth];
@@ -60,20 +60,15 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
             columnNames[i] = "";
         }
         
+        ////////////////Board Filling Method\\\\\\\\\\\\\\\\\
+        
         board.randomlyFillBoard(16, 2);
        // board.squareFill(20);
        // board.crossFill();
         data = board.getIntegerMatrix();
         new Random();
 
-        /*
-        for(int j = 0; j < gridWidth; j++) {
-            for(int i = 0; i < gridWidth; i++) {
-//                data[i][j] = random.nextInt(2);
-                data[i][j] = 0;
-            }
-        }
-		*/
+     
         
         model = new DefaultTableModel(data, columnNames){
                 @Override
@@ -103,7 +98,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
             }
         };
 
-        table.setPreferredScrollableViewportSize(new Dimension(20*gridWidth, 16*gridWidth)); //Scale size to grid size
+        table.setPreferredScrollableViewportSize(new Dimension(20*gridWidth, 20*gridWidth)); //Scale size to grid size
         table.setFillsViewportHeight(true);
 
         if (DEBUG) {
@@ -172,8 +167,8 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
           });
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(slider, BorderLayout.NORTH);
-        bottomPanel.add(progressBar, BorderLayout.SOUTH);
+        bottomPanel.add(slider, BorderLayout.SOUTH);
+        bottomPanel.add(progressBar, BorderLayout.NORTH);
         bottomPanel.setPreferredSize(new Dimension(200, 100));
         add(bottomPanel, BorderLayout.SOUTH);
 
@@ -278,7 +273,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
 
         //Have to wait half a sec while table is built, otherwise NPE in run when we set the table value
         try {
-            Thread.sleep(500); // Update every 2/10 of a second
+            Thread.sleep(500); // Update every t/10000 of a second
         }
         catch (InterruptedException e) {
             e.printStackTrace();
