@@ -25,6 +25,8 @@ import java.awt.event.MouseEvent;
 import java.util.Hashtable;
 import java.util.Random;
 
+//Just a test, delete comment later :)
+
 public class SimpleTableDemo extends JPanel implements ChangeListener {
 	Board board = null;
     private boolean DEBUG = false;
@@ -52,7 +54,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
     }
 
     public void init() {
-    	board = new Board(90);
+    	board = new Board(55);
     	gridWidth = board.getWidth();
     	
         String[] columnNames = new String[gridWidth];
@@ -62,7 +64,7 @@ public class SimpleTableDemo extends JPanel implements ChangeListener {
         
         ////////////////Board Filling Method\\\\\\\\\\\\\\\\\
         
-        board.randomlyFillBoard(16, 2);
+        board.randomlyFillBoard(10, 0);
        // board.squareFill(20);
        // board.crossFill();
         data = board.getIntegerMatrix();
